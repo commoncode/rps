@@ -1,0 +1,10 @@
+# Python
+**__pycache__/**
+*.pyc
+
+# Project Configs
+*.idea/*
+
+# Resources
+*db.sqlite3
+
