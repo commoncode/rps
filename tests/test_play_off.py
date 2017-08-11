@@ -158,6 +158,3 @@ class TestPlayOffRounds(unittest.TestCase):
         self.assertEqual(result.player1, WIN)
         self.assertEqual(result.player2, LOSE)
 
-
-if __name__ == '__main__':
-    unittest.main()
