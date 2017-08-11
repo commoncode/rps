@@ -3,5 +3,5 @@
 
 Rock Paper Scissor Bot Competition.
 
-Add a new bot using a PR and upon merge into master see the bot compete against exiting ones.
+Add a new bot using a PR and upon merge into master see the bot compete against existing ones.
 
