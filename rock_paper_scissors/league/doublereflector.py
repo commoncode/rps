@@ -17,7 +17,7 @@ class Player(BasePlayer):
         Must return a single var for the decided play:
         either 'ROCK', 'PAPER', 'SCISSORS'
         """
-        return self.plays.pop()
+        return self.plays[-2]
 
     def result(self, their_play):
-        self.plays.insert(0, their_play)
+        self.plays.append(their_play)
