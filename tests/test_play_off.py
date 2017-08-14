@@ -41,9 +41,9 @@ class TestPlayOffProperties(unittest.TestCase):
     def test_draws(self):
         self.assertEqual(
             self.play_off.draws,
-            self.play_off.played_rounds /
-            - self.play_off.p1_wins /
-            - self.play_off.p2_wins
+            self.play_off.played_rounds -
+            self.play_off.p1_wins -
+            self.play_off.p2_wins
         )
 
 
