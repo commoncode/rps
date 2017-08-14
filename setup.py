@@ -9,5 +9,10 @@ setup(
     install_requires=[
         'colorama',
     ],
+    entry_points={
+        'console_scripts': [
+            'competition = rock_paper_scissors.main:main'
+        ]
+    },
 
 )
