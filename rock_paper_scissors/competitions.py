@@ -16,7 +16,7 @@ class Competition(object):
 
     def run(self, rounds_per_game=10000):
         for game in self.setup_games(self.player_pairs):
-            game.gen_rounds(rounds=rounds_per_game)
+            game.play_rounds(rounds=rounds_per_game)
             self.scoreboard[game.player1.player_name] += game.p1_wins
             self.scoreboard[game.player2.player_name] += game.p2_wins
 
@@ -30,24 +30,5 @@ class Competition(object):
     def player_pairs(self):
         return combinations(self.players, r=2)
 
-
-def load_from_players_module():
-    players = list()
-    player_modules = pkgutil.walk_packages(path=league.__path__)
-    for importer, modname, _ in player_modules:
-        player_module = importer.find_module(modname).load_module(modname)
-        try:
-            player = player_module.Player
-        except AttributeError:
-            pass
-        else:
-            players.append(player)
-    return players
-
-
-if __name__ == '__main__':
-    competition = Competition(
-        players=[player for player in load_from_players_module()],
-        game_format=PlayOff
-    )
-    competition.run(rounds_per_game=100)
+    def __str__(self):
+        return str(self.scoreboard)
