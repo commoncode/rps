@@ -53,6 +53,10 @@ class PlayOff(object):
             while True:
                 yield self.play_round()
 
+    def play_rounds(self, rounds=None):
+        for _ in self.gen_rounds(rounds=rounds):
+            pass
+
     def play_round(self):
 
         play = player_data(
