@@ -1,6 +1,9 @@
 # Python
 **__pycache__/**
 *.pyc
+*.egg-info/*
+*.cache/*
+**/.coverage
 
 # Project Configs
 *.idea/*

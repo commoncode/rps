@@ -1,6 +1,9 @@
 language: python
 python:
 - "3.6"
-install: "pip install -e ."
+install: "pip install -r requirements.txt"
 script:
-  - pytest
+  - coverage run -m pytest
+  - coverage report
+  - flake8 --exit-zero
+  - competition
