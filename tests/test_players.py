@@ -1,66 +1,86 @@
-import time
 from itertools import cycle
-from unittest import TestCase, mock
+import time
+import unittest
 
-from rock_paper_scissors import PLAYS, ROCK
-from rock_paper_scissors.league import cycler, reflector, doublereflector, rando
+from rock_paper_scissors import PLAYS
+from rock_paper_scissors.main import load_from_players_module
+
+PLAYERS = load_from_players_module()
 
 
-class TestPlayer(TestCase):
+def pytest_generate_tests(metafunc):
 
-    def setUp(self):
-        self.player = mock.Mock()
-        self.player.play = lambda: ROCK
-        self.player.result = lambda _: None
-        self.player.author = 'Testy Mc Testface'
-        self.player.player_name = "MC Test"
+    test_names = [
+        scenario['source']
+        for scenario in metafunc.cls.scenarios
+    ]
+    scenario_values = [
+        [scenario['class']]
+        for scenario in metafunc.cls.scenarios
+    ]
 
-    def test_playing_gives_valid_play(self):
+    metafunc.parametrize(
+        argnames=['player_class'],
+        argvalues=scenario_values,
+        ids=test_names,
+        scope="class")
+
+
+class TestLoadedPlayers(object):
+    scenarios = [
+        {
+            'source': player_info[0],
+            'class': player_info[1]
+        }
+        for player_info in PLAYERS
+    ]
+
+    def test_has_string_author(self, player_class):
+        player = player_class()
+        assert isinstance(player.author, str)
+
+    def test_has_string_player_name(self, player_class):
+        player = player_class()
+        assert isinstance(player.player_name, str)
+
+    def test_playing_gives_valid_play(self, player_class):
+        player = player_class()
         for __ in range(10000):
-            TestCase.assertIn(self, self.player.play(), PLAYS)
+            assert player.play() in PLAYS
 
-    def test_playing_is_short(self):
+    def test_playing_is_short(self, player_class):
+        player = player_class()
         start = time.clock()
         for __ in range(10000):
-            self.player.play()
+            player.play()
         time_delta = time.clock() - start
-        TestCase.assertLessEqual(self, time_delta, 0.1)
+        assert time_delta <= 0.1
 
-    def test_player_accepts_result(self):
+    def test_player_accepts_result(self, player_class):
+        player = player_class()
         plays = cycle(PLAYS)
         for __ in range(10000):
-            self.player.result(next(plays))
+            player.result(next(plays))
 
-    def test_result_acceptance_is_short(self):
+    def test_result_acceptance_is_short(self, player_class):
+        player = player_class()
         start = time.clock()
         plays = cycle(PLAYS)
         for __ in range(10000):
-            self.player.result(next(plays))
+            player.result(next(plays))
         time_delta = time.clock() - start
-        TestCase.assertLessEqual(self, time_delta, 0.1)
-
-    def test_has_string_author(self):
-        TestCase.assertIsInstance(self, self.player.author, str)
-
-    def test_has_string_player_name(self):
-        TestCase.assertIsInstance(self, self.player.player_name, str)
+        assert time_delta <= 0.1
 
 
-class TestPlayer1(TestPlayer):
-    def setUp(self):
-        self.player = reflector.Player()
+class TestPlayerNames(unittest.TestCase):
 
-
-class TestPlayer2(TestPlayer):
-    def setUp(self):
-        self.player = cycler.Player()
-
-
-class TestPlayer3(TestPlayer):
-    def setUp(self):
-        self.player = doublereflector.Player()
-
-
-class TestPlayer4(TestPlayer):
-    def setUp(self):
-        self.player = rando.Player()
+    def test_unique_names(self):
+        unique_names = set()
+        for module_name, player_class in PLAYERS:
+            name = player_class.player_name
+            assert name not in unique_names, \
+                'Player name "{}" in "{}" is not unique'.format(
+                    name,
+                    module_name
+                )
+            unique_names.add(name)
