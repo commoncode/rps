@@ -41,7 +41,9 @@ class TestPlayOffProperties(unittest.TestCase):
     def test_draws(self):
         self.assertEqual(
             self.play_off.draws,
-            self.play_off.played_rounds - self.play_off.p1_wins - self.play_off.p2_wins
+            self.play_off.played_rounds -
+            self.play_off.p1_wins -
+            self.play_off.p2_wins
         )
 
 
@@ -65,7 +67,10 @@ class TestPlayOffCreate(unittest.TestCase):
 class TestPlayOffRound(unittest.TestCase):
 
     def setUp(self):
-        self.play_off = PlayOff(player1=MockPlayer1, player2=MockPlayer2)
+        self.play_off = PlayOff(
+            player1=MockPlayer1,
+            player2=MockPlayer2
+        )
 
     def test_play_called_once_on_p1(self):
         self.play_off.player1.play = mock.Mock(return_value=ROCK)
@@ -134,7 +139,9 @@ class TestPlayOffRounds(unittest.TestCase):
 
     def setUp(self):
         self.play_off = PlayOff(player1=MockPlayer1, player2=MockPlayer2)
-        self.play_off.player1.play = mock.Mock(side_effect=cycle([PAPER, SCISSORS, ROCK]))
+        self.play_off.player1.play = mock.Mock(
+            side_effect=cycle([PAPER, SCISSORS, ROCK])
+        )
 
     def rounds_played(self, rounds):
         for _ in self.play_off.gen_rounds(rounds=rounds):
@@ -157,4 +164,3 @@ class TestPlayOffRounds(unittest.TestCase):
         self.assertEqual(play.player2, ROCK)
         self.assertEqual(result.player1, WIN)
         self.assertEqual(result.player2, LOSE)
-

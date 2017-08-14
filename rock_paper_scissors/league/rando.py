@@ -16,7 +16,9 @@ class Player(BasePlayer):
         Must return a single var for the decided play:
         either 'ROCK', 'PAPER', 'SCISSORS'
         """
-        self.current_choice = random.choice([PAPER, ROCK, SCISSORS, ROCK, ROCK])
+        self.current_choice = random.choice(
+            [PAPER, ROCK, SCISSORS, ROCK, ROCK]
+        )
         return self.current_choice
 
     def result(self, their_play):

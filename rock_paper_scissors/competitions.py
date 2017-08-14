@@ -1,7 +1,4 @@
-import pkgutil
 from itertools import combinations
-from .play_off import PlayOff
-from . import league
 
 
 class Competition(object):

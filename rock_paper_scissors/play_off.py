@@ -3,12 +3,12 @@ from collections import namedtuple
 
 
 result_table = {
-    ROCK:    {
+    ROCK: {
         ROCK: DRAW,
         PAPER: LOSE,
         SCISSORS: WIN,
     },
-    PAPER:   {
+    PAPER: {
         ROCK: WIN,
         PAPER: DRAW,
         SCISSORS: LOSE,

@@ -19,9 +19,13 @@ def load_from_players_module():
 def score_board_print(scoreboard):
     best_to_worst_players = reversed(sorted(scoreboard, key=scoreboard.get))
     print("\nCompetition Results")
-    print("-"*32)
+    print("-" * 32)
     for num, player in enumerate(best_to_worst_players):
-        print('{} | {:20s}: {:4s}'.format(num+1, player, str(scoreboard[player])))
+        print('{} | {:20s}: {:4s}'.format(
+            num + 1,
+            player,
+            str(scoreboard[player]))
+        )
 
 
 def main():
