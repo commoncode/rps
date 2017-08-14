@@ -22,7 +22,7 @@ def main():
         game_format=play_off.PlayOff
     )
     competition.run()
-    return competition
+    return 0
 
 
 if __name__ == '__main__':
