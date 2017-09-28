@@ -4,7 +4,7 @@ from rock_paper_scissors import ROCK, PAPER, SCISSORS, BasePlayer
 
 class Player(BasePlayer):
 
-    player_name = 'Monty'
+    player_name = 'Monty2'
     author = 'Leonard B'
     x_beats_y = {ROCK: SCISSORS, PAPER: ROCK, SCISSORS: PAPER}
 
