@@ -10,4 +10,3 @@ class Player(BasePlayer):
 
     def play(self):
         return next(self.choice)
-
