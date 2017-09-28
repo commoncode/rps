@@ -75,22 +75,22 @@ class TestPlayOffRound(unittest.TestCase):
     def test_play_called_once_on_p1(self):
         self.play_off.player1.play = mock.Mock(return_value=ROCK)
         self.play_off.play_round()
-        self.play_off.player1.play.assert_called_once()
+        self.assertTrue(self.play_off.player1.play.calls)
 
     def test_play_called_once_on_p2(self):
         self.play_off.player2.play = mock.Mock(return_value=ROCK)
         self.play_off.play_round()
-        self.play_off.player2.play.assert_called_once()
+        self.assertTrue(self.play_off.player2.play.calls)
 
     def test_result_called_once_on_p1(self):
         self.play_off.player1.result = mock.Mock()
         self.play_off.play_round()
-        self.play_off.player1.result.assert_called_once()
+        self.assertTrue(self.play_off.player1.result.calls)
 
     def test_result_called_once_on_p2(self):
         self.play_off.player2.result = mock.Mock()
         self.play_off.play_round()
-        self.play_off.player2.result.assert_called_once()
+        self.assertTrue(self.play_off.player2.result.calls)
 
     def test_test_round_updated(self):
         self.play_off.play_round()
