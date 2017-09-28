@@ -13,7 +13,7 @@ class Player(BasePlayer):
 
     def play(self):
         self.current_choice = random.choice(
-            [PAPER, ROCK, SCISSORS]
+            [PAPER, ROCK, SCISSORS, ROCK, PAPER, SCISSORS]
         )
         return self.current_choice
 
