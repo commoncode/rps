@@ -1,4 +1,3 @@
-#from rock_paper_scissors import PAPER, BasePlayer
 import random
 from rock_paper_scissors import ROCK, PAPER, SCISSORS, BasePlayer
 
