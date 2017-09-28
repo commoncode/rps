@@ -13,7 +13,7 @@ class Player(BasePlayer):
 
     def play(self):
         if len(self.history) > 3:
-            return self.history[len(self.history) - 2]
+            return self.history[len(self.history) - 3]
         else:
             return random.choice([PAPER, ROCK, SCISSORS])
 
