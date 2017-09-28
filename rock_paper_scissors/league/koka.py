@@ -6,16 +6,16 @@ class Player(BasePlayer):
 
     player_name = 'Koka'
     author = 'Sourabh K'
+    history = []
 
-    def __init__(self):
-        self.history = []
-        self.current_choice = None
+    def __init__(self, start_play=ROCK):
+        self.next_play = start_play
 
     def play(self):
-        self.current_choice = random.choice(
-            [PAPER, ROCK, SCISSORS]
-        )
-        return self.current_choice
+        if len(self.history) > 3:
+            return self.history[len(self.history) - 2]
+        else:
+            return random.choice([PAPER, ROCK, SCISSORS])
 
     def result(self, their_play):
-        self.history.append((self.current_choice, their_play))
+        self.history.append(their_play)
