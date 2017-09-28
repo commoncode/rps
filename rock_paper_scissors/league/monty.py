@@ -27,7 +27,7 @@ class Player(BasePlayer):
             elif random_number <= self.counts[ROCK] + self.counts[PAPER]:
                 self.current_choice = SCISSORS
             else:
-                self.current_choice =  ROCK
+                self.current_choice = ROCK
         return self.current_choice
 
     def result(self, their_play):
